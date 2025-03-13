@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="cropper.css">
+    <script src="/lib/link.js"></script>
+    <script type="module" src="auth.js"></script>
+</head>
+
+<body>
+
+    <div class="blur-overlay"></div>
+    <div class="topbar">
+        <span onclick="show_sidebar()" class="menu-icon">&#9776;</span>
+        <h2>Admin Dashboard</h2>
+        <div class="profile">
+            <!-- <img src="/component/avatar.png" alt="Profile"> -->
+            <button id="logoutBtn">Logout</i></button>
+        </div>
+    </div>
+    <div class="content">
+        <div id="sidebar" class="sidebar">
+            <a onclick="admin_dashboard()">&#x1F4C8; Dashboard</a>
+            <a onclick="add_blogs()">&#x2795; Add Blog</a>
+            <a onclick="manager_blogs()">&#x1F4D6; Blogs</a>
+            <a onclick="manager_temps()">&#x231B; Temp</a>
+            <a onclick="admin_ads()"><i style="font-size: 25px;">&#x2699;</i> Setting</a>
+            <a href="/">🏠 Home</a>
+        </div>
+        <div class="main">
+            <div class="hide" id="admin-dashboard">
+                <div class="admin-dashboard-container">
+                    <div id="ads-status"></div>
+                    <h2>Tổng quan bài viết</h2>
+                    <div class="admin-box">
+                        <div class="count-box">
+                            <h3>Total</h3>
+                            <div id="count-total"></div>
+                        </div>
+                        <div class="count-box">
+                            <h3>Public</h3>
+                            <div id="count-posted"></div>
+                        </div>
+                        <div class="count-box">
+                            <h3>Private</h3>
+                            <div id="count-draft"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hide" id="admin-add-blogs">
+
+                <div class="admin-add-container">
+                    <form id='put-blogs'>
+                        <div>
+                            <label for="name">Đặt đường dẫn:</label>
+                            <input type="text" id="post-link" required />
+                        </div>
+
+                        <div>
+                            <label for="category">Chủ đề bài viết:</label>
+                            <input id="get-category" list="category" type="text" required>
+                            <datalist id="category"></datalist>
+                        </div>
+
+                        <div>
+                            <label for="name">Tên bài viết:</label>
+                            <input type="text" id="name" required />
+                        </div>
+
+                        <div>
+                            <label for="image-upload-edit">Thumbnail:</label>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="url" id="img-url" required />
+                                <button type="button" onclick="addImagelink()">Get</button>
+                            </div>
+                            <!-- <input type="file" id="image-upload-edit" accept="image/*" onchange="imageData_edit(event)"
+                                required /> -->
+                            <div id="content-img"></div>
+                        </div>
+
+                        <div class="just-center">
+                            <button type="submit">Tạo bài viết</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="wrapper hide">
+                    <div class="container">
+                        <div class="image-container">
+                            <img id="image-edit" />
+                        </div>
+                    </div>
+                    <div class="btns">
+                        <button id="use-btn" class="hide">✅</button>
+                        <button onclick="closeImageCropper()">❌</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="hide" id="admin-blogs">
+                <div class="table-list">
+                    <div style="height: 50px; display: flex; justify-content: center; gap: 20px; margin-bottom: 10px;"
+                        id="selec-topic"></div>
+                    <table id="scroll-topic"></table>
+                </div>
+            </div>
+
+            <div class="hide" id="admin-temps">
+                <table class="table-temps" id="table-temps"></table>
+            </div>
+
+            <div class="hide" id="admin-ads">
+                <div class="admin-ads-container">
+                    <div class="ads-container">
+                        <h2 style="text-align: center; margin: 10px 0;">Quảng cáo Qua Banner</h2>
+                        <p style="text-align: center; font-size: 15px; margin-top: 5px; color: #999;">(Quảng cáo sẽ tự
+                            động tắt nếu không có dữ liệu)</p>
+                        <div id="check-ads-status"></div>
+                        <table>
+                            <tbody id="get-banner-ads">
+                            </tbody>
+                        </table>
+                        <form id='add-banner-ads'>
+                            <div>
+                                <label for="ads-id">Thêm mới một item </label>
+                                <input type="text" id="img-id" placeholder="Img banner" required />
+                                <input type="text" id="ads-id" placeholder="ADS link" required>
+                            </div>
+                            <div class="just-center">
+                                <button type="submit">Tạo</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="ads-container">
+                        <h2 style="text-align: center; margin: 10px 0;">Quảng cáo bằng mã script</h2>
+                        <p style="text-align: center; font-size: 15px; margin-top: 5px; color: #999;">(mã sẽ được chèn
+                            trong thẻ head)</p>
+                        <table>
+                            <tbody id="get-script-ads">
+                            </tbody>
+                        </table>
+                        <form id='add-script-ads'>
+                            <div>
+                                <label for="ads-id">Chèn ADS script</label>
+                                <input type="text" id="name-ads" placeholder="Name" required />
+                                <input type="text" id="script-ads-id" placeholder="script" required>
+                            </div>
+                            <div class="just-center">
+                                <button type="submit">Tạo</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/lib/framework.js"></script>
+    <script src="cropper.js"></script>
+    <script src="admin.js"></script>
+
+</body>
+
+</html>
