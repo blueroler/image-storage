@@ -1,0 +1,469 @@
+@import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
+
+body {
+    display: none;
+    /* Ẩn toàn bộ nội dung */
+}
+
+
+/* Scrollbar cho phần tử cụ thể */
+.main::-webkit-scrollbar {
+    width: 5px;
+    background-color: #f0f0f0;
+}
+
+.main::-webkit-scrollbar-thumb {
+    background-color: #999;
+    /* Màu sắc tùy chỉnh cho list-main-section */
+    border-radius: 3px;
+}
+
+.main::-webkit-scrollbar-thumb:hover {
+    background-color: #777;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.topbar {
+    height: 50px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.menu-icon {
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.topbar h2 {
+    text-align: center;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile button {
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    background: #007bff;
+    width: 60px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    margin-top: 50px;
+    /* Để tránh đè lên topbar */
+}
+
+.sidebar {
+    width: 150px;
+    background-color: #fff;
+    height: calc(100% - 50px);
+    /* Chiều cao trừ topbar */
+    position: fixed;
+    top: 50px;
+    left: -150px;
+    /* Ẩn sidebar mặc định */
+    box-shadow: 3px 0 3px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    transition: left 0.3s ease;
+    z-index: 100;
+}
+
+.sidebar.show {
+    left: 0;
+    /* Hiển thị sidebar */
+}
+
+
+.sidebar a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.sidebar a:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.sidebar a i {
+    margin-right: 10px;
+}
+
+.main {
+    flex: 1;
+    margin-left: 0;
+    /* padding: 20px; */
+    border: 10px solid #fff;
+    transition: margin-left 0.3s ease;
+    height: calc(100% - 50px);
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.content.sidebar-visible .main {
+    margin-left: 150px;
+    /* Khi sidebar hiện, đẩy main */
+}
+
+.admin-dashboard-container {
+    max-width: 800px;
+    padding: 10px 100px;
+    height: fit-content;
+    margin: 0 auto;
+    border: #ddd 1px solid;
+}
+
+.admin-dashboard-container h2 {
+    text-align: center;
+    margin: 20px auto;
+}
+
+.admin-box {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    margin-bottom: 50px;
+    justify-content: center;
+    gap: 20px;
+}
+
+.count-box {
+    width: 150px;
+    height: 150px;
+    background-color: #007bff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.admin-box h3,
+.admin-box h4 {
+    margin: 0 auto;
+}
+
+.count-box h3,
+.count-box h4,
+.count-box div {
+    min-width: 100px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.table-list,
+.table-temps {
+    max-width: 800px;
+    border-collapse: collapse;
+    /* margin-bottom: 50px; */
+}
+
+.table-list button {
+    height: 38px;
+}
+
+#selec-topic {
+    background-color: #fff;
+    position: sticky;
+    top: 0px;
+}
+
+.table-list td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+}
+
+.main button {
+    width: 70px;
+    padding: 10px 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); */
+}
+
+.main button:hover {
+    background-color: #0056b3;
+}
+
+#admin-blogs h2 {
+    margin: 10px;
+}
+
+.admin-add-container {
+    width: 800px;
+}
+
+.admin-add-container form,
+.list-topic-container {
+    /* background: #fff; */
+    border-radius: 8px;
+    width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-add-container form div {
+    margin-bottom: 15px;
+    /* padding: 5px; */
+}
+
+.admin-add-container #content-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    border: 0px;
+}
+
+.just-center {
+    display: flex;
+    /* width: 300px; */
+    margin: 0 auto;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="url"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+form button {
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex: 1;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+form button:hover {
+    transform: translate(3px, -3px);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+form input:focus[type="text"],
+form textarea:focus {
+    border: 1px solid rgb(0, 162, 255);
+    outline: none;
+}
+
+.posts-img {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 10px auto;
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+
+.posts-img img {
+    height: 300px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.admin-ads-container {
+    max-width: 800px;
+    font-family: sans-serif;
+    margin: auto;
+    font-size: 25px;
+}
+
+.admin-ads-container .ads-container {
+    padding: 39px;
+    margin: 30px auto;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 2px solid #777;
+}
+
+table td:focus {
+    background-color: #eae9e9;
+    border-radius: 0px;
+    justify-content: flex-start;
+}
+
+table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+table h4,
+table p {
+    margin: 0;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+.hide {
+    display: none;
+}
+
+/* Toàn bộ body sẽ chứa hiệu ứng */
+body.blur .blur-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Lớp phủ tối */
+    backdrop-filter: blur(5px);
+    /* Hiệu ứng mờ */
+    z-index: 5;
+    /* Dưới wrapper */
+}
+
+/* Popup xuất hiện phía trên */
+.wrapper {
+    width: min(90%, 800px);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background: white;
+    padding: 40px;
+    border-radius: 0.5em;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper.hide {
+    display: none;
+    /* Ẩn popup */
+}
+
+.wrapper.show {
+    display: block;
+    /* Hiển thị popup */
+}
+
+.container .image-container {
+    width: 100%;
+}
+
+input[type="file"] {
+    width: 100%;
+}
+
+input[type="file"]::file-selector-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: #0056b3;
+    transition: background-color 0.3s;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.btns button {
+    width: 100px;
+    height: 50px;
+    border-radius: 8px;
+    font-size: 20px;
+    border: 2px solid #025bee;
+    background-color: #ffffff;
+    color: #025bee;
+}
+
+.btns button:hover {
+    background-color: #025bee;
+    color: #fff;
+}
